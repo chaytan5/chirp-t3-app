@@ -5,22 +5,18 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { filterUserForClient } from "~/server/helpers/filterDataForClient";
 
-
-
 export const profileRouter = createTRPCRouter({
-
   getUserByUsername: publicProcedure
     .input(z.object({ username: z.string() }))
     .query(async ({ input }) => {
-    
-    const [user] = await clerkClient.users.getUserList({
-      username: [input.username],
-    })
-      
+      const [user] = await clerkClient.users.getUserList({
+        username: [input.username],
+      });
+
       if (!user) {
-      throw new TRPCError({ code: "NOT_FOUND", message:"user not found"})
+        throw new TRPCError({ code: "NOT_FOUND", message: "user not found" });
       }
-      
+
       return filterUserForClient(user);
-  })
+    }),
 });
