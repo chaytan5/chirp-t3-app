@@ -1,25 +1,26 @@
 name: CI
 
-on:
-  push:
-    branches:
-      - main
+on: [push, pull_request]
 
-env: DATABASE_URL = "https://example.com"
+env:
+  DATABASE_URL: "https://fake.com"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Run TypeScript typechecking
+      - name: Typecheck
         run: npm run typecheck
 
-      - name: Run ESLint
+      - name: Lint
         run: npm run lint
+
+      - name: Print Environment Variable
+        run: echo $MY_ENV_VAR
