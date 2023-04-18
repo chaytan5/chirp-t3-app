@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-env: DATABASE_URL = "http://example.com"
+env: DATABASE_URL = "https://example.com"
 
 jobs:
   build:
